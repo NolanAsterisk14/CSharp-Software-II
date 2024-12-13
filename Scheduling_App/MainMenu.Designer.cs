@@ -63,10 +63,10 @@
             // mainMenuLabel
             // 
             this.mainMenuLabel.AutoSize = true;
-            this.mainMenuLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.mainMenuLabel.Location = new System.Drawing.Point(33, 18);
+            this.mainMenuLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.mainMenuLabel.Location = new System.Drawing.Point(45, 19);
             this.mainMenuLabel.Name = "mainMenuLabel";
-            this.mainMenuLabel.Size = new System.Drawing.Size(196, 39);
+            this.mainMenuLabel.Size = new System.Drawing.Size(167, 33);
             this.mainMenuLabel.TabIndex = 1;
             this.mainMenuLabel.Text = "Main Menu";
             // 
@@ -106,6 +106,7 @@
             this.CAMToolStripMenuItem.Padding = new System.Windows.Forms.Padding(4, 8, 4, 8);
             this.CAMToolStripMenuItem.Size = new System.Drawing.Size(218, 35);
             this.CAMToolStripMenuItem.Text = "Customer Appointment Manager";
+            this.CAMToolStripMenuItem.Click += new System.EventHandler(this.CAMToolStripMenuItem_Click);
             // 
             // logoutToolStripMenuItem
             // 
@@ -117,6 +118,7 @@
             this.logoutToolStripMenuItem.Padding = new System.Windows.Forms.Padding(4, 8, 4, 8);
             this.logoutToolStripMenuItem.Size = new System.Drawing.Size(168, 35);
             this.logoutToolStripMenuItem.Text = "Log Out";
+            this.logoutToolStripMenuItem.Click += new System.EventHandler(this.logoutToolStripMenuItem_Click);
             // 
             // ACToolStripMenuItem
             // 
@@ -127,6 +129,7 @@
             this.ACToolStripMenuItem.Padding = new System.Windows.Forms.Padding(4, 8, 4, 8);
             this.ACToolStripMenuItem.Size = new System.Drawing.Size(218, 35);
             this.ACToolStripMenuItem.Text = "Appointment Calendar";
+            this.ACToolStripMenuItem.Click += new System.EventHandler(this.ACToolStripMenuItem_Click);
             // 
             // MainMenu
             // 

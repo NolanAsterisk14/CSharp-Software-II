@@ -94,7 +94,7 @@ namespace Scheduling_App
             {
                 if (UsernameTextBox.Text == user.userName && PasswordTextBox.Text == user.password)
                 {
-                    MainMenu mainMenu = new MainMenu(user.userName);
+                    MainMenu mainMenu = new MainMenu(user.userName, this);
                     mainMenu.Show();
                     this.Hide();
                     userFound = true;

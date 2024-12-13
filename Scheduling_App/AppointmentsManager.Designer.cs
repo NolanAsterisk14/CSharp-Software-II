@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AppointmentsManager));
             this.AppointmentsDataGridView = new System.Windows.Forms.DataGridView();
+            this.AppointmentsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.AppointmentsBindingNavigator = new System.Windows.Forms.BindingNavigator(this.components);
             this.bindingNavigatorAddNewItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
@@ -46,6 +47,7 @@
             this.bindingNavigatorSaveButton = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorRefreshButton = new System.Windows.Forms.ToolStripButton();
             ((System.ComponentModel.ISupportInitialize)(this.AppointmentsDataGridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.AppointmentsBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.AppointmentsBindingNavigator)).BeginInit();
             this.AppointmentsBindingNavigator.SuspendLayout();
             this.SuspendLayout();
@@ -56,9 +58,11 @@
             this.AppointmentsDataGridView.AllowUserToDeleteRows = false;
             this.AppointmentsDataGridView.AllowUserToResizeColumns = false;
             this.AppointmentsDataGridView.AllowUserToResizeRows = false;
+            this.AppointmentsDataGridView.AutoGenerateColumns = false;
             this.AppointmentsDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.AppointmentsDataGridView.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.AppointmentsDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.AppointmentsDataGridView.DataSource = this.AppointmentsBindingSource;
             this.AppointmentsDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.AppointmentsDataGridView.Location = new System.Drawing.Point(0, 25);
             this.AppointmentsDataGridView.MultiSelect = false;
@@ -67,11 +71,15 @@
             this.AppointmentsDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.AppointmentsDataGridView.Size = new System.Drawing.Size(1084, 425);
             this.AppointmentsDataGridView.TabIndex = 2;
+            this.AppointmentsDataGridView.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.AppointmentsDataGridView_CellBeginEdit);
+            this.AppointmentsDataGridView.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.AppointmentsDataGridView_RowsAdded);
+            this.AppointmentsDataGridView.RowValidating += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.AppointmentsDataGridView_RowValidating);
             // 
             // AppointmentsBindingNavigator
             // 
             this.AppointmentsBindingNavigator.AddNewItem = this.bindingNavigatorAddNewItem;
             this.AppointmentsBindingNavigator.AllowMerge = false;
+            this.AppointmentsBindingNavigator.BindingSource = this.AppointmentsBindingSource;
             this.AppointmentsBindingNavigator.CountItem = this.bindingNavigatorCountItem;
             this.AppointmentsBindingNavigator.DeleteItem = null;
             this.AppointmentsBindingNavigator.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -184,6 +192,7 @@
             this.bindingNavigatorDeleteItem.RightToLeftAutoMirrorImage = true;
             this.bindingNavigatorDeleteItem.Size = new System.Drawing.Size(23, 22);
             this.bindingNavigatorDeleteItem.Text = "Delete";
+            this.bindingNavigatorDeleteItem.Click += new System.EventHandler(this.bindingNavigatorDeleteItem_Click);
             // 
             // bindingNavigatorSaveButton
             // 
@@ -194,6 +203,7 @@
             this.bindingNavigatorSaveButton.Size = new System.Drawing.Size(23, 22);
             this.bindingNavigatorSaveButton.Text = "Save Button";
             this.bindingNavigatorSaveButton.ToolTipText = "Save";
+            this.bindingNavigatorSaveButton.Click += new System.EventHandler(this.bindingNavigatorSaveButton_Click);
             // 
             // bindingNavigatorRefreshButton
             // 
@@ -204,6 +214,7 @@
             this.bindingNavigatorRefreshButton.Size = new System.Drawing.Size(23, 22);
             this.bindingNavigatorRefreshButton.Text = "toolStripButton1";
             this.bindingNavigatorRefreshButton.ToolTipText = "Refresh";
+            this.bindingNavigatorRefreshButton.Click += new System.EventHandler(this.bindingNavigatorRefreshButton_Click);
             // 
             // AppointmentsManager
             // 
@@ -214,7 +225,9 @@
             this.Controls.Add(this.AppointmentsBindingNavigator);
             this.Name = "AppointmentsManager";
             this.Text = "Appointments Manager";
+            this.Shown += new System.EventHandler(this.AppointmentsManager_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.AppointmentsDataGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.AppointmentsBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.AppointmentsBindingNavigator)).EndInit();
             this.AppointmentsBindingNavigator.ResumeLayout(false);
             this.AppointmentsBindingNavigator.PerformLayout();
@@ -240,5 +253,6 @@
         private System.Windows.Forms.ToolStripButton bindingNavigatorDeleteItem;
         private System.Windows.Forms.ToolStripButton bindingNavigatorSaveButton;
         private System.Windows.Forms.ToolStripButton bindingNavigatorRefreshButton;
+        private System.Windows.Forms.BindingSource AppointmentsBindingSource;
     }
 }

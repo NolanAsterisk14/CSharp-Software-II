@@ -26,7 +26,7 @@ namespace Scheduling_App
             this.loggedInUser = loggedInUser;
         }
 
-        private void RecordsManager_Load(object sender, EventArgs e)
+        private void RecordsManager_Shown(object sender, EventArgs e)
         {
             //Get the fields for clientrecord from the database tables
             var query = from customer in dbcontext.customers
@@ -43,6 +43,7 @@ namespace Scheduling_App
             clientRecordsList = query.ToList();
             RecordsBindingSource.DataSource = clientRecordsList;
             RecordsDataGridView.DataSource = RecordsBindingSource;
+
             //Remove unnecessary columns
             if (RecordsDataGridView.Columns["ClientID"] != null)
             {
@@ -98,7 +99,7 @@ namespace Scheduling_App
                 {
                     if (row.DataBoundItem is ClientRecord record)
                     {
-                        //Check if the customer already exists
+                        //Check if the customer and address already exist
                         var existingCustomer = dbcontext.customers.FirstOrDefault(c => c.customerId == record.ClientID);
                         var existingAddress = dbcontext.addresses.FirstOrDefault(a => a.addressId == record.ClientAddressID);
 
@@ -110,7 +111,7 @@ namespace Scheduling_App
                             {
                                 existingAddress.address1 = record.ClientAddress;
                                 existingAddress.phone = record.ClientPhone;
-                                existingAddress.lastUpdate = DateTime.Now;
+                                existingAddress.lastUpdate = TimeZoneUtil.ConvertToDBTimeZone(DateTime.Now);    //Ensure times are saved to DB as EST
                             }
                         }
                         if (existingCustomer != null)
@@ -119,7 +120,7 @@ namespace Scheduling_App
                             if (existingCustomer.customerName != record.ClientName)
                             {
                                 existingCustomer.customerName = record.ClientName;
-                                existingCustomer.lastUpdate = DateTime.Now;
+                                existingCustomer.lastUpdate = TimeZoneUtil.ConvertToDBTimeZone(DateTime.Now);   //Ensure times are saved to DB as EST
                             }
                         }
 
@@ -135,9 +136,9 @@ namespace Scheduling_App
                                 cityId = (dbcontext.addresses.Max(a => a.cityId)),
                                 postalCode = (dbcontext.addresses.Max(a => a.postalCode) + 1),
                                 phone = record.ClientPhone,
-                                createDate = DateTime.Now,
+                                createDate = TimeZoneUtil.ConvertToDBTimeZone(DateTime.Now),                    //Ensure times are saved to DB as EST
                                 createdBy = loggedInUser,
-                                lastUpdate = DateTime.Now,
+                                lastUpdate = TimeZoneUtil.ConvertToDBTimeZone(DateTime.Now),
                                 lastUpdateBy = loggedInUser
                             };
 
@@ -150,9 +151,9 @@ namespace Scheduling_App
                                 customerName = record.ClientName,
                                 addressId = record.ClientAddressID,
                                 active = true,
-                                createDate = DateTime.Now,
+                                createDate = TimeZoneUtil.ConvertToDBTimeZone(DateTime.Now),                    //Ensure times are saved to DB as EST
                                 createdBy = loggedInUser,
-                                lastUpdate = DateTime.Now,
+                                lastUpdate = TimeZoneUtil.ConvertToDBTimeZone(DateTime.Now),
                                 lastUpdateBy = loggedInUser
                             };
 
@@ -191,6 +192,14 @@ namespace Scheduling_App
                     except = except.InnerException;
                 }
                 MessageBox.Show(except.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //If user tries to save an invalid entry, stop tracking the invalid entry
+                foreach (System.Data.Entity.Infrastructure.DbEntityEntry entry in dbcontext.ChangeTracker.Entries())
+                {
+                    if (entry.State == System.Data.Entity.EntityState.Modified || entry.State == System.Data.Entity.EntityState.Added)
+                    {
+                        entry.State = System.Data.Entity.EntityState.Detached;
+                    }
+                }
             }
         }
 
@@ -245,12 +254,12 @@ namespace Scheduling_App
                         {
                             dbcontext.addresses.Remove(address);
                         }
-
-                        RecordsDataGridView.Rows.Remove(RecordsDataGridView.CurrentRow);
                         if (clientRecordsList.Contains(record))
                         {
                             clientRecordsList.Remove(record);
                         }
+
+                        RecordsDataGridView.Rows.Remove(RecordsDataGridView.CurrentRow);
                     }
                 }
 
@@ -274,8 +283,11 @@ namespace Scheduling_App
             {
                 RecordsBindingSource.DataSource = null;
                 RecordsDataGridView.DataSource = null;
-                RecordsManager_Load(sender, e);
+                RecordsManager_Shown(sender, e);
             }
         }
+
+
     }
 }
+

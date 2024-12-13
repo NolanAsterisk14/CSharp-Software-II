@@ -57,12 +57,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppointmentCalendar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AppointmentCalendar.Designer.cs">
+      <DependentUpon>AppointmentCalendar.cs</DependentUpon>
+    </Compile>
     <Compile Include="AppointmentsManager.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="AppointmentsManager.Designer.cs">
       <DependentUpon>AppointmentsManager.cs</DependentUpon>
     </Compile>
+    <Compile Include="ClientAppointment.cs" />
     <Compile Include="ClientRecord.cs" />
     <Compile Include="Login.cs">
       <SubType>Form</SubType>
@@ -84,6 +91,10 @@
     <Compile Include="RecordsManager.Designer.cs">
       <DependentUpon>RecordsManager.cs</DependentUpon>
     </Compile>
+    <Compile Include="TimeZoneUtil.cs" />
+    <EmbeddedResource Include="AppointmentCalendar.resx">
+      <DependentUpon>AppointmentCalendar.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="AppointmentsManager.resx">
       <DependentUpon>AppointmentsManager.cs</DependentUpon>
     </EmbeddedResource>

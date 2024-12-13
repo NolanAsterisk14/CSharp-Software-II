@@ -13,16 +13,26 @@ namespace Scheduling_App
     public partial class MainMenu : Form
     {
         private string loggedInUser;
+        private Form hiddenLoginForm;
         private Form activeChildForm;
-        public MainMenu(string loggedInUser)
+        public MainMenu(string loggedInUser, LoginForm loginForm)
         {
             InitializeComponent();
             this.loggedInUser = loggedInUser;
+            this.hiddenLoginForm = loginForm;
         }
 
         private void CRMToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OpenChildForm(new RecordsManager(loggedInUser), sender);
+        }
+        private void CAMToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenChildForm(new AppointmentsManager(loggedInUser), sender);
+        }
+        private void ACToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenChildForm(new AppointmentCalendar(), sender);
         }
 
         //Generic functionality for opening forms and attaching them to the split panel
@@ -56,5 +66,13 @@ namespace Scheduling_App
         {
             Application.Exit();
         }
+
+        private void logoutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Dispose();
+            hiddenLoginForm.Show();
+        }
+
+
     }
 }

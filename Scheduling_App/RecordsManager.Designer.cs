@@ -241,7 +241,7 @@
             this.Name = "RecordsManager";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Records Manager";
-            this.Load += new System.EventHandler(this.RecordsManager_Load);
+            this.Shown += new System.EventHandler(this.RecordsManager_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.RecordsDataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.RecordsBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.RecordsBindingNavigator)).EndInit();
