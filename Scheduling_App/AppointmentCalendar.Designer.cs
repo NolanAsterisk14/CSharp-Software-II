@@ -33,22 +33,29 @@
             this.ACLabel = new System.Windows.Forms.Label();
             this.ACDataGridView = new System.Windows.Forms.DataGridView();
             this.ACBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.ACPanel = new System.Windows.Forms.Panel();
             this.ACUserTZLabel = new System.Windows.Forms.Label();
             this.ACDataTZLabel = new System.Windows.Forms.Label();
             this.ACDataTZValueLabel = new System.Windows.Forms.Label();
             this.ACUserTZValueLabel = new System.Windows.Forms.Label();
+            this.ACSplitContainer = new System.Windows.Forms.SplitContainer();
             ((System.ComponentModel.ISupportInitialize)(this.ACDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ACBindingSource)).BeginInit();
-            this.panel1.SuspendLayout();
+            this.ACPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ACSplitContainer)).BeginInit();
+            this.ACSplitContainer.Panel1.SuspendLayout();
+            this.ACSplitContainer.Panel2.SuspendLayout();
+            this.ACSplitContainer.SuspendLayout();
             this.SuspendLayout();
             // 
             // ACMonthCalendar
             // 
             this.ACMonthCalendar.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ACMonthCalendar.Location = new System.Drawing.Point(32, 140);
+            this.ACMonthCalendar.Location = new System.Drawing.Point(36, 112);
+            this.ACMonthCalendar.MaxSelectionCount = 1;
             this.ACMonthCalendar.Name = "ACMonthCalendar";
             this.ACMonthCalendar.TabIndex = 0;
+            this.ACMonthCalendar.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.ACMonthCalendar_DateChanged);
             // 
             // ACLabel
             // 
@@ -56,7 +63,7 @@
             this.ACLabel.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.ACLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ACLabel.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.ACLabel.Location = new System.Drawing.Point(20, 55);
+            this.ACLabel.Location = new System.Drawing.Point(26, 47);
             this.ACLabel.Name = "ACLabel";
             this.ACLabel.Size = new System.Drawing.Size(252, 29);
             this.ACLabel.TabIndex = 2;
@@ -67,26 +74,32 @@
             this.ACDataGridView.AllowUserToAddRows = false;
             this.ACDataGridView.AllowUserToDeleteRows = false;
             this.ACDataGridView.AutoGenerateColumns = false;
+            this.ACDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.ACDataGridView.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.ACDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.ACDataGridView.DataSource = this.ACBindingSource;
-            this.ACDataGridView.Dock = System.Windows.Forms.DockStyle.Right;
-            this.ACDataGridView.Location = new System.Drawing.Point(288, 0);
+            this.ACDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ACDataGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
+            this.ACDataGridView.Location = new System.Drawing.Point(0, 0);
+            this.ACDataGridView.MultiSelect = false;
             this.ACDataGridView.Name = "ACDataGridView";
+            this.ACDataGridView.ReadOnly = true;
+            this.ACDataGridView.RowHeadersVisible = false;
             this.ACDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.ACDataGridView.Size = new System.Drawing.Size(796, 450);
+            this.ACDataGridView.Size = new System.Drawing.Size(790, 450);
             this.ACDataGridView.TabIndex = 3;
             // 
-            // panel1
+            // ACPanel
             // 
-            this.panel1.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.panel1.Controls.Add(this.ACDataTZValueLabel);
-            this.panel1.Controls.Add(this.ACUserTZValueLabel);
-            this.panel1.Controls.Add(this.ACDataTZLabel);
-            this.panel1.Controls.Add(this.ACUserTZLabel);
-            this.panel1.Location = new System.Drawing.Point(14, 327);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(259, 107);
-            this.panel1.TabIndex = 4;
+            this.ACPanel.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.ACPanel.Controls.Add(this.ACDataTZValueLabel);
+            this.ACPanel.Controls.Add(this.ACUserTZValueLabel);
+            this.ACPanel.Controls.Add(this.ACDataTZLabel);
+            this.ACPanel.Controls.Add(this.ACUserTZLabel);
+            this.ACPanel.Location = new System.Drawing.Point(18, 299);
+            this.ACPanel.Name = "ACPanel";
+            this.ACPanel.Size = new System.Drawing.Size(259, 107);
+            this.ACPanel.TabIndex = 4;
             // 
             // ACUserTZLabel
             // 
@@ -130,24 +143,49 @@
             this.ACUserTZValueLabel.Size = new System.Drawing.Size(0, 15);
             this.ACUserTZValueLabel.TabIndex = 2;
             // 
+            // ACSplitContainer
+            // 
+            this.ACSplitContainer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ACSplitContainer.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
+            this.ACSplitContainer.IsSplitterFixed = true;
+            this.ACSplitContainer.Location = new System.Drawing.Point(0, 0);
+            this.ACSplitContainer.Name = "ACSplitContainer";
+            // 
+            // ACSplitContainer.Panel1
+            // 
+            this.ACSplitContainer.Panel1.Controls.Add(this.ACLabel);
+            this.ACSplitContainer.Panel1.Controls.Add(this.ACPanel);
+            this.ACSplitContainer.Panel1.Controls.Add(this.ACMonthCalendar);
+            this.ACSplitContainer.Panel1MinSize = 100;
+            // 
+            // ACSplitContainer.Panel2
+            // 
+            this.ACSplitContainer.Panel2.Controls.Add(this.ACDataGridView);
+            this.ACSplitContainer.Panel2MinSize = 400;
+            this.ACSplitContainer.Size = new System.Drawing.Size(1084, 450);
+            this.ACSplitContainer.SplitterDistance = 290;
+            this.ACSplitContainer.TabIndex = 5;
+            // 
             // AppointmentCalendar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightGray;
             this.ClientSize = new System.Drawing.Size(1084, 450);
-            this.Controls.Add(this.panel1);
-            this.Controls.Add(this.ACDataGridView);
-            this.Controls.Add(this.ACLabel);
-            this.Controls.Add(this.ACMonthCalendar);
+            this.Controls.Add(this.ACSplitContainer);
             this.Name = "AppointmentCalendar";
             this.Text = "Appointment Calendar";
+            this.Shown += new System.EventHandler(this.AppointmentCalendar_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.ACDataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ACBindingSource)).EndInit();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
+            this.ACPanel.ResumeLayout(false);
+            this.ACPanel.PerformLayout();
+            this.ACSplitContainer.Panel1.ResumeLayout(false);
+            this.ACSplitContainer.Panel1.PerformLayout();
+            this.ACSplitContainer.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.ACSplitContainer)).EndInit();
+            this.ACSplitContainer.ResumeLayout(false);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -157,10 +195,11 @@
         private System.Windows.Forms.Label ACLabel;
         private System.Windows.Forms.DataGridView ACDataGridView;
         private System.Windows.Forms.BindingSource ACBindingSource;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel ACPanel;
         private System.Windows.Forms.Label ACDataTZLabel;
         private System.Windows.Forms.Label ACUserTZLabel;
         private System.Windows.Forms.Label ACDataTZValueLabel;
         private System.Windows.Forms.Label ACUserTZValueLabel;
+        private System.Windows.Forms.SplitContainer ACSplitContainer;
     }
 }

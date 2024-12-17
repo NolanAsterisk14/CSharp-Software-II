@@ -72,7 +72,6 @@
             this.AppointmentsDataGridView.Size = new System.Drawing.Size(1084, 425);
             this.AppointmentsDataGridView.TabIndex = 2;
             this.AppointmentsDataGridView.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.AppointmentsDataGridView_CellBeginEdit);
-            this.AppointmentsDataGridView.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.AppointmentsDataGridView_RowsAdded);
             this.AppointmentsDataGridView.RowValidating += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.AppointmentsDataGridView_RowValidating);
             // 
             // AppointmentsBindingNavigator

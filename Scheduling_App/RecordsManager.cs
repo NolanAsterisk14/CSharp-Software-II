@@ -131,8 +131,6 @@ namespace Scheduling_App
                             {
                                 address1 = record.ClientAddress,
                                 address2 = "",
-                                //The cityId and postalCode assignments don't follow business logic
-                                //I just used them in place of empty values ¯\_(ツ)_/¯
                                 cityId = (dbcontext.addresses.Max(a => a.cityId)),
                                 postalCode = (dbcontext.addresses.Max(a => a.postalCode) + 1),
                                 phone = record.ClientPhone,
@@ -183,6 +181,10 @@ namespace Scheduling_App
                         entry.State = System.Data.Entity.EntityState.Detached;
                     }
                 }
+                //Refresh the datagridview
+                RecordsBindingSource.DataSource = null;
+                RecordsDataGridView.DataSource = null;
+                RecordsManager_Shown(sender, e);
             }
 
             catch (Exception except)
@@ -200,6 +202,10 @@ namespace Scheduling_App
                         entry.State = System.Data.Entity.EntityState.Detached;
                     }
                 }
+                //Refresh the datagridview
+                RecordsBindingSource.DataSource = null;
+                RecordsDataGridView.DataSource = null;
+                RecordsManager_Shown(sender, e);
             }
         }
 

@@ -10,6 +10,7 @@ namespace Scheduling_App
     {
         public int AppointmentID { get; set; }
         public int CustomerID { get; set; }
+        public int UserID { get; set; }
         public string Type { get; set; }
         public DateTime Start { get; set; }
         public DateTime End { get; set; }
@@ -18,6 +19,7 @@ namespace Scheduling_App
         {
             AppointmentID = -1;
             CustomerID = -1;
+            UserID = -1;
             Type = null;
             Start = DateTime.Now;
             End = DateTime.Now;

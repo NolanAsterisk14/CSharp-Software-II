@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 namespace Scheduling_App
 {
@@ -95,6 +96,7 @@ namespace Scheduling_App
                 if (UsernameTextBox.Text == user.userName && PasswordTextBox.Text == user.password)
                 {
                     MainMenu mainMenu = new MainMenu(user.userName, this);
+                    Record_Login(user.userName);
                     mainMenu.Show();
                     this.Hide();
                     userFound = true;
@@ -125,6 +127,28 @@ namespace Scheduling_App
             isEnglish = SpanishRadioButton.Checked ? false : true;
         }
 
+        private void Record_Login(string userName)
+        {
+            string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Login_History.txt");
+            string logEntry = $"{DateTime.Now}: {userName} logged in.";
+
+            try
+            {
+                using (StreamWriter writer = new StreamWriter(filePath, true))
+                {
+                    writer.WriteLine(logEntry);
+                }
+            }
+
+            catch (Exception except)
+            {
+                while (except.InnerException != null)
+                {
+                    except = except.InnerException;
+                }
+                MessageBox.Show(except.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
 
     }
 }

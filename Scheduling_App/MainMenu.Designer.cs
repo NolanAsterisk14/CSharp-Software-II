@@ -35,6 +35,7 @@
             this.CAMToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.logoutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ACToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.RVToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.menuSplitContainer)).BeginInit();
             this.menuSplitContainer.Panel1.SuspendLayout();
             this.menuSplitContainer.SuspendLayout();
@@ -45,6 +46,7 @@
             // 
             this.menuSplitContainer.BackColor = System.Drawing.SystemColors.Control;
             this.menuSplitContainer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.menuSplitContainer.IsSplitterFixed = true;
             this.menuSplitContainer.Location = new System.Drawing.Point(0, 0);
             this.menuSplitContainer.Name = "menuSplitContainer";
             // 
@@ -78,7 +80,8 @@
             this.CRMToolStripMenuItem,
             this.CAMToolStripMenuItem,
             this.logoutToolStripMenuItem,
-            this.ACToolStripMenuItem});
+            this.ACToolStripMenuItem,
+            this.RVToolStripMenuItem});
             this.mainMenuStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.VerticalStackWithOverflow;
             this.mainMenuStrip.Location = new System.Drawing.Point(0, 0);
             this.mainMenuStrip.Name = "mainMenuStrip";
@@ -131,6 +134,17 @@
             this.ACToolStripMenuItem.Text = "Appointment Calendar";
             this.ACToolStripMenuItem.Click += new System.EventHandler(this.ACToolStripMenuItem_Click);
             // 
+            // RVToolStripMenuItem
+            // 
+            this.RVToolStripMenuItem.BackColor = System.Drawing.Color.LightGray;
+            this.RVToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.RVToolStripMenuItem.Margin = new System.Windows.Forms.Padding(15, 5, 15, 5);
+            this.RVToolStripMenuItem.Name = "RVToolStripMenuItem";
+            this.RVToolStripMenuItem.Padding = new System.Windows.Forms.Padding(4, 8, 4, 8);
+            this.RVToolStripMenuItem.Size = new System.Drawing.Size(218, 35);
+            this.RVToolStripMenuItem.Text = "View Reports";
+            this.RVToolStripMenuItem.Click += new System.EventHandler(this.RVToolStripMenuItem_Click);
+            // 
             // MainMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -142,6 +156,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Serious Schedulers";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainMenu_FormClosing);
+            this.Shown += new System.EventHandler(this.MainMenu_Shown);
             this.menuSplitContainer.Panel1.ResumeLayout(false);
             this.menuSplitContainer.Panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.menuSplitContainer)).EndInit();
@@ -161,5 +176,6 @@
         private System.Windows.Forms.ToolStripMenuItem logoutToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ACToolStripMenuItem;
         private System.Windows.Forms.Label mainMenuLabel;
+        private System.Windows.Forms.ToolStripMenuItem RVToolStripMenuItem;
     }
 }

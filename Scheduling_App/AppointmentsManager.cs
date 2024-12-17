@@ -78,19 +78,23 @@ namespace Scheduling_App
                         {
                             AppointmentID = appointment.appointmentId,
                             CustomerID = appointment.customerId,
+                            UserID = appointment.userId,
                             Type = appointment.type,
                             Start = appointment.start,
                             End = appointment.end
                         };
-            //Store the results in the appointmentsList and bind it
             appointmentsList = query.ToList();
             AppointmentsBindingSource.DataSource = appointmentsList;
             AppointmentsDataGridView.DataSource = AppointmentsBindingSource;
 
-            //Remove unnecessary column
+            //Remove unnecessary columns
             if (AppointmentsDataGridView.Columns["AppointmentID"] != null)
             {
                 AppointmentsDataGridView.Columns.Remove("AppointmentID");
+            }
+            if (AppointmentsDataGridView.Columns["UserID"] != null)
+            {
+                AppointmentsDataGridView.Columns.Remove("UserID");
             }
             //Ensure the datetime's display format is correct
             foreach (DataGridViewColumn column in AppointmentsDataGridView.Columns)
@@ -229,6 +233,10 @@ namespace Scheduling_App
                         entry.State = System.Data.Entity.EntityState.Detached;
                     }
                 }
+                //Refresh the datagridview
+                AppointmentsBindingSource.DataSource = null;
+                AppointmentsDataGridView.DataSource = null;
+                AppointmentsManager_Shown(sender, e);
             }
 
             catch (Exception except)
@@ -246,32 +254,10 @@ namespace Scheduling_App
                         entry.State = System.Data.Entity.EntityState.Detached;
                     }
                 }
-            }
-        }
-
-        //Ensure the new row's hidden column is assigned to properly
-        private void AppointmentsDataGridView_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
-        {
-            //Prerequisite for CASE 2, so handle exceptions
-            try
-            {
-                if (AppointmentsDataGridView.Rows[e.RowIndex].DataBoundItem is ClientAppointment appointment)
-                {
-                    if (appointment.AppointmentID == -1)
-                    {
-                        appointment.AppointmentID = appointmentsList.Max(a => a.AppointmentID) + 1;     //This doesn't actually do anything right now
-                    }
-
-                }
-            }
-
-            catch (Exception except)
-            {
-                while (except.InnerException != null)
-                {
-                    except = except.InnerException;
-                }
-                MessageBox.Show(except.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //Refresh the datagridview
+                AppointmentsBindingSource.DataSource = null;
+                AppointmentsDataGridView.DataSource = null;
+                AppointmentsManager_Shown(sender, e);
             }
         }
 
